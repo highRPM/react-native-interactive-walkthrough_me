@@ -170,38 +170,38 @@ const WalkthroughDisplayer = () => {
 
   const lastStepsRef = useRef<IWalkthroughStep[]>([]);
 
-  if (isAndroid) {
-    const isKeyboardOpen = useKeyboard();
-    useEffect(
-      () =>
-        isWalkthroughOn
-          ? BackHandler.addEventListener("hardwareBackPress", () => {
-            if (isKeyboardOpen) {
-              return false;
-            } else {
-              const backEnabled = currentSteps.filter(
-                (s) => s.enableHardwareBack,
-              );
-              if (backEnabled.length) {
-                const functions = backEnabled
-                .map((s) => s.enableHardwareBack)
-                .filter(
-                  (x) => typeof x === "function",
-                ) as EnableHardwareBackFunction[];
-                if (!functions.length) {
-                  // if no function was specified, just do the default previous
-                  functions.push(() => previous());
-                }
-                functions.forEach((f) => f({ goTo, previous }));
-              }
-
-              return true; // return true to block the back button which we always do when the walkthrough is on.
-            }
-          }).remove
-          : () => undefined,
-      [isWalkthroughOn, isKeyboardOpen, currentSteps, previous, goTo],
-    );
-  }
+  // if (isAndroid) {
+  //   const isKeyboardOpen = useKeyboard();
+  //   useEffect(
+  //     () =>
+  //       isWalkthroughOn
+  //         ? BackHandler.addEventListener("hardwareBackPress", () => {
+  //           if (isKeyboardOpen) {
+  //             return false;
+  //           } else {
+  //             const backEnabled = currentSteps.filter(
+  //               (s) => s.enableHardwareBack,
+  //             );
+  //             if (backEnabled.length) {
+  //               const functions = backEnabled
+  //               .map((s) => s.enableHardwareBack)
+  //               .filter(
+  //                 (x) => typeof x === "function",
+  //               ) as EnableHardwareBackFunction[];
+  //               if (!functions.length) {
+  //                 // if no function was specified, just do the default previous
+  //                 functions.push(() => previous());
+  //               }
+  //               functions.forEach((f) => f({ goTo, previous }));
+  //             }
+  //
+  //             return true; // return true to block the back button which we always do when the walkthrough is on.
+  //           }
+  //         }).remove
+  //         : () => undefined,
+  //     [isWalkthroughOn, isKeyboardOpen, currentSteps, previous, goTo],
+  //   );
+  // }
 
   useLayoutEffect(
     () => {
