@@ -160,9 +160,6 @@ const WalkthroughDisplayer = () => {
     backdropColor,
     transitionDuration,
     animateNextLayoutChange,
-    isWalkthroughOn,
-    previous,
-    goTo,
     debug,
   } = context;
 
