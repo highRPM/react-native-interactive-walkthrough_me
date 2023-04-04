@@ -10,7 +10,6 @@ import React, {
   useLayoutEffect,
 } from "react";
 import {
-
   LayoutAnimation,
   Platform,
   UIManager,
