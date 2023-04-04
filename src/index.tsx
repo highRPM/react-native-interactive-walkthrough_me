@@ -16,7 +16,6 @@ import {
   UIManager,
   View,
   ViewStyle,
-  Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
@@ -32,27 +31,7 @@ const enableExperimentalLayoutAnimation = () => {
   }
 };
 
-const useKeyboard = () => {
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      () => setKeyboardVisible(true),
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => setKeyboardVisible(false),
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
-  return isKeyboardVisible;
-};
 
 type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
@@ -168,8 +147,7 @@ const WalkthroughDisplayer = () => {
   const lastStepsRef = useRef<IWalkthroughStep[]>([]);
 
   if (isAndroid) {
-    const isKeyboardOpen = useKeyboard();
-    console.log(isKeyboardOpen);
+
   }
 
   useLayoutEffect(
